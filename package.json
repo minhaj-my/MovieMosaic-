@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@ogtirth/liquid-glass-oss": "^0.1.0",
@@ -18,6 +19,7 @@
     "simplex-noise": "^4.0.3"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.42.3",
     "@eslint/js": "^9.33.0",
     "@types/node": "^24.4.0",
     "@types/react": "^19.1.13",
@@ -28,6 +30,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "tailwindcss": "^4.1.13",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "wrangler": "^4.105.0"
   }
 }
