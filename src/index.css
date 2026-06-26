@@ -7,27 +7,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #030014;
-
-  --color-light-100: #cecefb;
-  --color-light-200: #a8b5db;
-
-  --color-gray-100: #9ca4ab;
-
-  --color-dark-100: #0f0d23;
-
   --font-dm-sans: DM Sans, sans-serif;
-
   --breakpoint-xs: 480px;
 
-  --background-image-hero-pattern: url("/BG.jpg");
+  --color-primary: #030014;
+  --color-light-100: #cecefb;
+  --color-light-200: #a8b5db;
+  --color-gray-100: #9ca4ab;
+  --color-dark-100: #0f0d23;
 }
-
 @layer base {
   body {
     font-family: "DM Sans", serif;
     font-optical-sizing: auto;
-    background: #030014;
   }
 
   h1 {
@@ -39,7 +31,7 @@
   }
 
   main {
-    @apply min-h-screen relative bg-primary;
+    @apply min-h-screen relative;
   }
 
   header {
@@ -52,101 +44,162 @@
 }
 
 @layer components {
-  .pattern {
-    @apply bg-hero-pattern w-full h-screen bg-center bg-cover absolute z-0;
+  .glass-card {
+    width: 240px;
+    height: 360px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(255, 255, 255, 0);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
-  .wrapper {
-    @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+  /* Diagonal reflection shine effect */
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.6s ease;
   }
 
-  .trending {
-    @apply mt-20;
-
-    & ul {
-      @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
+  /* Premium Desktop Hover Animation */
+  @media (hover: hover) {
+    .glass-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 0 20px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
     }
 
-    & ul li {
-      @apply min-w-[230px] flex flex-row items-center;
-    }
-
-    & ul li p {
-      @apply fancy-text mt-[22px] text-nowrap;
-    }
-
-    & ul li img {
-      @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
-    }
-  }
-
-  .search {
-    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
-
-    & div {
-      @apply relative flex items-center;
-    }
-
-    & img {
-      @apply absolute left-2 h-5 w-5;
-    }
-
-    & input {
-      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
+    .glass-card:hover::before {
+      left: 150%;
     }
   }
 
-  .all-movies {
-    @apply space-y-9;
-
-    & ul {
-      @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
-    }
-  }
-
-  .movie-card {
-    @apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10;
-
-    & img {
-      @apply rounded-lg h-auto w-full;
-    }
-
-    & h3 {
-      @apply text-white font-bold text-base line-clamp-1;
-    }
-
-    & .content {
-      @apply mt-2 flex flex-row items-center flex-wrap gap-2;
-    }
-
-    & .rating {
-      @apply flex flex-row items-center gap-1;
-    }
-
-    & .rating img {
-      @apply size-4 object-contain;
-    }
-
-    & .rating p {
-      @apply font-bold text-base text-white;
-    }
-
-    & .content span {
-      @apply text-sm text-gray-100;
-    }
-
-    & .content .lang {
-      @apply capitalize text-gray-100 font-medium text-base;
-    }
-
-    & .content .year {
-      @apply text-gray-100 font-medium text-base;
+  /* Premium Mobile Touch Animation */
+  @media (hover: none) {
+    .glass-card:active {
+      transform: scale(0.96);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
   }
 }
 
+.pattern {
+  @apply w-full h-screen bg-cyan-950  absolute z-0;
+}
+
+.wrapper {
+  @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+}
+
+.trending {
+  @apply mt-20;
+
+  & ul {
+    @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
+  }
+
+  & ul li {
+    @apply min-w-[230px] flex flex-row items-center;
+  }
+
+  & ul li p {
+    @apply fancy-text mt-[22px] text-nowrap;
+  }
+
+  & ul li img {
+    @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
+  }
+}
+
+.search {
+  @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
+
+  & div {
+    @apply relative flex items-center;
+  }
+
+  & img {
+    @apply absolute left-2 h-5 w-5;
+  }
+
+  & input {
+    @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
+  }
+}
+
+.all-movies {
+  @apply space-y-9;
+
+  & ul {
+    @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+  }
+}
+
+.movie-card {
+  @apply p-5 rounded-3xl shadow-inner;
+
+  & img {
+    @apply rounded-2xl h-60 w-full;
+  }
+
+  & h3 {
+    @apply text-white font-bold text-base  line-clamp-1;
+  }
+
+  & .content {
+    @apply mt-2 flex flex-row items-center flex-wrap gap-2;
+  }
+
+  & .rating {
+    @apply flex flex-row items-center gap-1;
+  }
+
+  & .rating img {
+    @apply size-4 object-contain;
+  }
+
+  & .rating p {
+    @apply font-bold text-base text-white;
+  }
+
+  & .content span {
+    @apply text-sm text-gray-100;
+  }
+
+  & .content .lang {
+    @apply capitalize text-gray-100 font-medium text-base;
+  }
+
+  & .content .year {
+    @apply text-gray-100 font-medium text-base;
+  }
+}
+
 @utility text-gradient {
-  @apply bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent;
+  @apply bg-linear-to-r from-[#7EB8FF] to-[#4A90FF] bg-clip-text text-transparent;
 }
 
 @utility fancy-text {
@@ -163,4 +216,3 @@
     display: none;
   }
 }
- 

@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ogtirth/liquid-glass-oss": "^0.1.0",
     "@tailwindcss/vite": "^4.1.13",
-    "appwrite": "^20.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-use": "^17.6.0"
+    "react-use": "^17.6.0",
+    "simplex-noise": "^4.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
