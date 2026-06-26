@@ -18,7 +18,8 @@ const App = () => {
   return (
     <main>
       {/*<ParticleBackground />*/}
-      <div className="bg-black">
+      <ParticleBackground />
+      <div className="">
         <header>
           <h1>
             Find <span className="text-gradient">Movies</span> you'll Enjoy
